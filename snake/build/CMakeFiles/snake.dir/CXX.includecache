@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/martin/git/projetc++/snake2/snake3/cpp/fruit.cpp
+../includes/fruit.h
+/home/martin/git/projetc++/snake2/snake3/includes/fruit.h
+stdlib.h
+/home/martin/git/projetc++/snake2/snake3/cpp/stdlib.h
+array
+-
+vector
+-
+
+/home/martin/git/projetc++/snake2/snake3/includes/fruit.h
+iostream
+-
+snake.h
+/home/martin/git/projetc++/snake2/snake3/includes/snake.h
+
+/home/martin/git/projetc++/snake2/snake3/includes/snake.h
+iostream
+-
+queue
+-
+

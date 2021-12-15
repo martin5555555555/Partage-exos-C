@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic CMakeFiles/snake.dir/main.cpp.o CMakeFiles/snake.dir/cpp/bg.cpp.o CMakeFiles/snake.dir/cpp/display.cpp.o CMakeFiles/snake.dir/cpp/fruit.cpp.o CMakeFiles/snake.dir/cpp/keyboard.cpp.o CMakeFiles/snake.dir/cpp/snake.cpp.o CMakeFiles/snake.dir/cpp/test.cpp.o  -o snake 
