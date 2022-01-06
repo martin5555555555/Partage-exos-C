@@ -11,9 +11,9 @@ using namespace std;
 
 Matrix::Matrix(const int i,const int j)
 {   
-    int* tab;
-    tab = (int*) malloc (i*j*sizeof(int));
-    memset(tab, 0, (i*j)*sizeof(int));
+    double* tab;
+    tab = (double*) malloc (i*j*sizeof(double));
+    memset(tab, 0, (i*j)*sizeof(double));
     this ->length = i;
     this ->width = j;
     this -> tab = tab;
@@ -24,7 +24,7 @@ Matrix::Matrix(const Matrix & matrix)
     int j = matrix.width;
     this-> length = i;
     this->width = j;
-    int * tab = (int*) malloc((i*j)*sizeof(int));
+    double * tab = (double*) malloc((i*j)*sizeof(double));
     for (int k =0; k< i*j; k++)
     {
         tab[k] = matrix.tab[k];
@@ -47,25 +47,37 @@ for(int i= 1; i<N; i++)
 *m(0,0) = -1;
 for (int i =0; i<9; i++)
      {
-         cout << "i : " << i << " " << m.tab[i] << endl;
+         
      };
 Matrix mtranspose = m.transpose();
 for (int i =0; i<9; i++)
      {
-         cout << "i : " << i << " " << mtranspose.tab[i] << endl;
+         
      };
 m = m + mtranspose ;
 
 return m;
 };
 
-int* Matrix::get(const int i, const int j) const
+Matrix Matrix::create_id(const int n)
 {
-    int* res = &(this->tab)[i*(this->width) + j] ;
+    Matrix m(n,n);
+    for (int i = 0; i<n; i++)
+    {
+        *m(i,i) = 1;
+    };
+    return m;
+};
+
+
+
+double* Matrix::get(const int i, const int j) const
+{
+    double* res = &(this->tab)[i*(this->width) + j] ;
     return res;
 }
 
-int* Matrix::operator()(const int i, const int j) const
+double* Matrix::operator()(const int i, const int j) const
 {
     return this->Matrix::get(i,j);
 };
@@ -80,8 +92,7 @@ Matrix Matrix::summ(const Matrix& matrix_2) const
     if (i1 == i2 && j1 == j2)
         {   Matrix res(i1, j1);
             for (int i=0; i< i1 * j1; i++)
-              {cout<< "oo" << i << ":" << this->tab[i] << "o" << matrix_2.tab[i] ;
-                  res.tab[i] = this->tab[i] + matrix_2.tab[i];
+                {  res.tab[i] = this->tab[i] + matrix_2.tab[i];
               };
        return res;
         }
@@ -109,14 +120,21 @@ Matrix Matrix::mult_mat(const Matrix& matrix_2) const
              for (int j=0;j<j2;j++)
              {  
                  for (int k=0; k<j1; k++)
-                 {  int u = (*(*this)(i,k)) * (*matrix_2(k,j));
-                    *res(i,j) += u;
+                 {   
+                    double u;
+                    u =  (*(*this)(i,k)) * (*matrix_2(k,j));
+                   
+                    *res(i,j) =*res(i,j)+ u;
 
                  };
              };
          };
-    return res;  
+         return res;
     }
+    else 
+     throw std::invalid_argument("matrixes sizes don't match");
+
+    
 };
 
 Matrix Matrix::operator*(const Matrix& matrix_2) const
@@ -146,11 +164,9 @@ Matrix Matrix::transpose() const
     for (int i = 0; i< this->length; i++)
     {
         for (int j=0; j<i;j++)
-        {   int ex_value = *res(i,j);
+        {   double ex_value = *res(i,j);
             *res(i,j) = *res(j,i);
             *res(j,i) = ex_value;
-            cout << endl;
-            cout <<  i<<  "et"<< j << "--"<<ex_value <<"aaa" << *res(i,j) << endl;
         };
     };
     return res;

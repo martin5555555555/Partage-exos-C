@@ -19,10 +19,12 @@ def text_to_time(textfile_name):
     content = fichier.readlines()
     n = len(content)
     for i in range (n-1):
+        print("burbe")
         lists = content[i][0:-1]
         content[i] = int(lists)
     lists = content[n-1]   
     content[n-1] = int(lists)
     return np.array(content)   
 
+text_to_time("time_euler_explicit")
 

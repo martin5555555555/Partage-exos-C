@@ -8,7 +8,7 @@ class Matrix
     public :
         int length;
         int width;
-        int* tab;
+        double* tab;
 
     public:
     Matrix(const int i, const int j);
@@ -17,8 +17,10 @@ class Matrix
 
     public:
     static Matrix init_K(const int N) ;
-    int* get(const int i, const int j) const;
-    int* operator ()(const int i, const int j) const;
+    static Matrix create_id(const int n);
+
+    double* get(const int i, const int j) const;
+    double* operator ()(const int i, const int j) const;
     Matrix summ(const Matrix& matrix_2) const;
     Matrix operator+(const Matrix& matrix_2) const ;
     Matrix mult_mat(const Matrix& matrix_2) const;

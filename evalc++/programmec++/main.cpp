@@ -1,10 +1,14 @@
 #include "matrix.h"
-#include "euler_resolution.h"
+#include "write_vector.h"
+#include "euler_explicit_resolution.h"
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "tests.h"
+#include "factorisationLu.h"
 using namespace std;
     
+
 
  int main()
  {   
@@ -22,18 +26,25 @@ using namespace std;
          cout << "i : " << i << " " << m.tab[i] << endl;
      };*/
      
-    Matrix m0(3,3);
-    for (int i = 0; i<3; i++)
-    {
-        *m0(i,i) = 1;
-    };
-     
-     Matrix m(3,3);
-     m =  m*(m0);
-     for (int i =0; i<9; i++)
-     {
-         cout << "i : " << i << " " << m.tab[i] << endl;
-     };
+    
+     Matrix K1 = Matrix::init_K(3);
+     Matrix T0(3,1);
+     double t0 = 0;
+     double dt = 1;
+     double t = 5;
+    
+
+
+
+
+     vector<Matrix> res = euler_explicit_resolution(T0, t0, dt,t,K1);
      return 0;
- };
+     };
+
+
+    
+     
+ 
+
+
 
