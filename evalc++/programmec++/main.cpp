@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <fstream>
+#include <stdio.h>
 #include "tests.h"
 #include "factorisationLu.h"
 using namespace std;
@@ -11,7 +12,8 @@ using namespace std;
 
 
  int main()
- {   
+{   system("../../bash/autorisation.sh");
+    system("../../bash/delete_files.sh");
      /*Matrix matK = Matrix::init_K(3);
      cout << "~~" << matK.length << " " << matK.width << endl;
      for (int i =0; i<9; i++)
@@ -27,18 +29,23 @@ using namespace std;
      };*/
      
     
-     Matrix K1 = Matrix::init_K(3);
+     Matrix K1 = Matrix::init_K_stationnaire(3);
      Matrix T0(3,1);
      double t0 = 0;
      double dt = 1;
      double t = 5;
     
+    for (int i =0; i<9; i++)
+     {
+         cout << "i : " << i << " " << K1.tab[i] << endl;
+     };
 
 
-
-
-     vector<Matrix> res = euler_explicit_resolution(T0, t0, dt,t,K1);
-     return 0;
+    
+     //vector<Matrix> res = euler_explicit_resolution(T0, t0, dt,t,K1);
+     system("../../bash/exec_python.sh");
+     
+     return 0; 
      };
 
 

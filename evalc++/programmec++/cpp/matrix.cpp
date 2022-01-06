@@ -37,25 +37,49 @@ Matrix::~Matrix()
   
 };
 
-Matrix Matrix::init_K(const int N)
+Matrix Matrix::init_random_D(const int N)
 {
-Matrix m(N,N);
-for(int i= 1; i<N; i++)
-   { *m(i,i-1) = 1;
-     *m(i,i) = -1;
-   };
-*m(0,0) = -1;
-for (int i =0; i<9; i++)
-     {
-         
-     };
-Matrix mtranspose = m.transpose();
-for (int i =0; i<9; i++)
-     {
-         
-     };
-m = m + mtranspose ;
+    
+}
 
+
+Matrix Matrix::init_K_stationnaire(const int N)
+{ vector<double> D1;
+  for (int i =0; i<N;i++)
+  {
+      D1.push_back(1);
+  };
+Matrix m(N,N);
+cout << "okok";
+*m(0,0) = -D1[0] - D1[1];
+cout << "okok";
+for(int i= 1; i<N-1; i++)
+   { *m(i,i-1) = D1[i-1];
+     *m(i,i) = -D1[i] - D1[i+1];
+     *m(i-1,i) = D1[i];
+   };
+*m(N-1,N-2) = D1[N-2];
+*m(N-2, N-1) = D1[N-1];
+return m;
+};
+
+Matrix Matrix::init_K_variable(const int N)
+{ vector<double> D1;
+  for (int i =0; i<N;i++)
+  {
+      D1.push_back(1);
+  };
+Matrix m(N,N);
+cout << "okok";
+*m(0,0) = -D1[0] - D1[1];
+cout << "okok";
+for(int i= 1; i<N-1; i++)
+   { *m(i,i-1) = D1[i-1];
+     *m(i,i) = -D1[i] - D1[i+1];
+     *m(i-1,i) = D1[i];
+   };
+*m(N-1,N-2) = D1[N-2];
+*m(N-2, N-1) = D1[N-1];
 return m;
 };
 
