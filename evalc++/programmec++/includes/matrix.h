@@ -16,8 +16,10 @@ class Matrix
     ~Matrix();
 
     public:
-    static Matrix init_K(const int N) ;
+    static Matrix init_K_stationnaire(const int N) ;
     static Matrix create_id(const int n);
+    static vector<double> init_random_D(const int N);
+    static Matrix init_K_variable(const int N);
 
     double* get(const int i, const int j) const;
     double* operator ()(const int i, const int j) const;

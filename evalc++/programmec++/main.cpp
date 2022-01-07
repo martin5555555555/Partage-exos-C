@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include "tests.h"
 #include "factorisationLu.h"
+#include "matrix_ creuse.h"
+#include "factorisationLu_creuse.h"
 using namespace std;
     
 
@@ -28,8 +30,8 @@ using namespace std;
          cout << "i : " << i << " " << m.tab[i] << endl;
      };*/
      
-    
-     Matrix K1 = Matrix::init_K_stationnaire(3);
+    /*
+     Matrix K1 = Matrix::init_K_variable(3);
      Matrix T0(3,1);
      double t0 = 0;
      double dt = 1;
@@ -44,7 +46,21 @@ using namespace std;
     
      //vector<Matrix> res = euler_explicit_resolution(T0, t0, dt,t,K1);
      system("../../bash/exec_python.sh");
+     */
+    cout<< 8;
+     Matrix_creuse K1 = Matrix_creuse::init_K_stationnaire(3);
+     cout<< 8;
+     vector<double> T0;
+     T0.push_back(1);
+     T0.push_back(0);
+     T0.push_back(1);
      
+     double t0 = 0;
+     double dt = 1;
+     double t = 5;
+     vector<double> res = final_resolution(K1, T0);
+     cout << res[0] << "r" << res[1] << "r0"<< res[2];
+
      return 0; 
      };
 

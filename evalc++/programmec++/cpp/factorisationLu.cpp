@@ -5,7 +5,7 @@ vector<Matrix> lu_decomposition(const Matrix & matrix)
     Matrix U = Matrix(matrix.length, matrix.width);
     *L(0,0) = 1;
     *U(0,0) = *matrix(0,0);
-    *U(0,1) = *matrix(0,1);
+    *U(0,1) = *matrix(0,1); 
     for(int i = 2; i<matrix.length; i++)
     {
         *L(i-1,i-1) = 1;

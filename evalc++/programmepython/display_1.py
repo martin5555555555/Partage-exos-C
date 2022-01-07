@@ -32,6 +32,7 @@ y = [4,5,6]
 
 
 plt.plot(x,y)
+plt.show()
 plt.show(block = False)
 input('press <ENTER> to continue')
 
