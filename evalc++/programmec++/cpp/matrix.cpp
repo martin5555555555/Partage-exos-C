@@ -7,6 +7,7 @@
 #include <thread>
 #include <iterator>
 #include <algorithm>
+#include <math.h>
 using namespace std;
 
 
@@ -61,22 +62,26 @@ vector<double> Matrix::init_random_D(const int N)
 };
 
 
-Matrix Matrix::init_K_stationnaire(const int N)
+Matrix Matrix::init_K_stationnaire(const int N, const double delta_x)
 { vector<double> D1;
   for (int i =0; i<N;i++)
   {
       D1.push_back(1);
   };
 Matrix m(N,N);
-*m(0,0) = -D1[0] - D1[1];
 for(int i= 1; i<N-1; i++)
    { *m(i,i-1) = D1[i-1];
      *m(i,i) = -D1[i] - D1[i+1];
      *m(i-1,i) = D1[i];
    };
-*m(N-1,N-2) = D1[N-2];
+*m(N-1,N-2) = 0;
 *m(N-2, N-1) = D1[N-1];
-return m;
+*m(0,0)= 0;
+*m(N-1,N-1)= 0;
+*m(0,1) =0;
+
+
+return m*(1/delta_x/delta_x);
 };
 
 Matrix Matrix::init_K_variable(const int N)
@@ -94,6 +99,19 @@ for(int i= 1; i<N-1; i++)
 *m(N-2, N-1) = D1[N-1];
 return m;
 };
+
+Matrix Matrix::init_T0(const int N, const double delta_x)
+{   double pi = M_PI;
+    Matrix T0(N,1);
+    T0.tab[0] = 0;
+    for (int  i =1; i<N; i++)
+    {   
+
+        T0.tab[i] = 1/2 + sin(2*pi*i* delta_x) - 1/2 * cos(2*pi*i* delta_x);
+    }
+    return T0;
+
+}
 
 Matrix Matrix::create_id(const int n)
 {
@@ -180,7 +198,7 @@ Matrix Matrix::operator*(const Matrix& matrix_2) const
 }
 
 
-Matrix Matrix::mult_scal(const int lambda) const
+Matrix Matrix::mult_scal(const double lambda) const
 {
     Matrix res(*this);
     for (int i =0; i< (this->length)*(this->width);i++)
@@ -189,7 +207,7 @@ Matrix Matrix::mult_scal(const int lambda) const
     return res;
 };
 
-Matrix Matrix::operator*(const int lambda) const
+Matrix Matrix::operator*(const double lambda) const
 {
     Matrix res = this->mult_scal(lambda);
     return res;

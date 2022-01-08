@@ -1,19 +1,22 @@
 import itertools
 import numpy as np
 import matplotlib.pyplot as plt
+#plt.use('Agg') # no UI backend
+
 import time
 def text_to_vectors(textfile_name):
     fichier = open(textfile_name, 'r')
     content = fichier.readlines()
     n = len(content)
-    for i in range (n-1):
+    m = len(content[0].split(','))-1
+    res = np.zeros((m,n))
+
+    for i in range (n):
         lists = content[i].split(',')
-        lists[-1] = lists[-1][0:-1]
+        lists =lists[0:-1]
         print(lists)
-        content[i] = np.vectorize(int)(np.array(lists))
-    lists = content[n-1].split(',')
-    content[n-1] = np.vectorize(int)(np.array(lists))
-    return content
+        res[:,i] = np.vectorize(float)(np.array(lists))
+    return res
 
 def text_to_time(textfile_name):
     fichier = open(textfile_name, 'r')
@@ -21,19 +24,43 @@ def text_to_time(textfile_name):
     n = len(content)
     for i in range (n-1):
         lists = content[i][0:-1]
-        content[i] = int(lists)
+        content[i] = float(lists)
     lists = content[n-1]   
-    content[n-1] = int(lists)
+    content[n-1] = float(lists)
     return np.array(content)   
 
 
-x = [1,2,3]
-y = [4,5,6]
+time = text_to_time("../../programmepython/time_euler_explicit")
+
+results_explicit = text_to_vectors("../../programmepython/results_euler_explicit") 
+results_implicit = text_to_vectors("../../programmepython/results_euler_implicit") 
+results_explicit_creuse = text_to_vectors("../../programmepython/results_euler_explicit_creuse") 
+results_implicit_creuse = text_to_vectors("../../programmepython/results_euler_implicit_creuse") 
 
 
-plt.plot(x,y)
-plt.show()
-plt.show(block = False)
-input('press <ENTER> to continue')
+delta_x = 0.1
+x = np.arange(0,1,delta_x)
+n = len(results_explicit)
+for i in range (n):
+    plt.plot(x, results_explicit[:,i])
+plt.savefig("results_euler_explicit")
+plt.close()
+
+for i in range (n):
+    plt.plot(x, results_implicit[:,i])
+plt.savefig("results_euler_implicit")
+plt.close()
+
+for i in range (n):
+    plt.plot(x, results_explicit_creuse[:,i])
+plt.savefig("results_euler_explicit_creuse")
+plt.close()
+
+for i in range (n):
+    plt.plot(x, results_implicit_creuse[:,i])
+plt.savefig("results_euler_implicit_creuse")
+plt.close()
+
+
 
 

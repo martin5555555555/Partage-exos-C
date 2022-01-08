@@ -1,65 +1,58 @@
 #include "matrix.h"
 #include "write_vector.h"
 #include "euler_explicit_resolution.h"
+#include "euler_implicit_resolution.h"
+#include "euler_explicit_resolution_creuse.h"
+#include "euler_implicit_resolution_creuse.h"
 #include <iostream>
 #include <vector>
 #include <fstream>
 #include <stdio.h>
 #include "tests.h"
 #include "factorisationLu.h"
-#include "matrix_ creuse.h"
+#include "matrix_creuse.h"
 #include "factorisationLu_creuse.h"
 using namespace std;
     
 
 
  int main()
-{   system("../../bash/autorisation.sh");
-    system("../../bash/delete_files.sh");
-     /*Matrix matK = Matrix::init_K(3);
-     cout << "~~" << matK.length << " " << matK.width << endl;
-     for (int i =0; i<9; i++)
-     {
-         cout << "i : " << i << " " << matK.tab[i] << endl;
-     };
-     Matrix m(3,3);
-     int x = 1;
-     *m(0,0) =  1;
-     for (int i =0; i<9; i++)
-     {
-         cout << "i : " << i << " " << m.tab[i] << endl;
-     };*/
-     
-    /*
-     Matrix K1 = Matrix::init_K_variable(3);
-     Matrix T0(3,1);
-     double t0 = 0;
-     double dt = 1;
-     double t = 5;
+{  
+    system("../../bash/autorisation.sh"); //autorise les programmes bash à faire des actions sur les autres commandes
+    system("../../bash/delete_files.sh"); // supprime les anciens fichiers textes de résultats, afin de ne pas réecrire par dessus.
     
-    for (int i =0; i<9; i++)
-     {
-         cout << "i : " << i << " " << K1.tab[i] << endl;
-     };
+     // premiers résultats à l'aide de D constant et de la classe Matrix "de base"
+     double L = 1; // longueur du système choisi
+     double N = 10; // nombre de points dans l'espace choisi
+     double delta_x = L/N;// pas de distance choisi
+    //initialisation des paramètres t0, t et dt:
+    double t0 = 0; // temps initial
+    double t = 0.5; // temps final
+    double dt = 0.05; // pas de temps choisi
+     //initialisation des matrices K1 et T0;
+     Matrix  K1 = Matrix::init_K_stationnaire(N, delta_x);
+     
+     Matrix T0 = Matrix::init_T0(N, delta_x);
+     
+     
+
+    //résolution avec euler_explicit
+    vector<Matrix> res1 = euler_explicit_resolution(T0, t0, dt, t, K1);
+    //résolution avec euler_implicite
+    vector<Matrix> res2 = euler_implicit_resolution(T0, t0, dt, t, K1);
+
+    Matrix_creuse  K1_creuse = Matrix_creuse::init_K_stationnaire(N, delta_x);
+     
+    vector<double> T0_creuse = Matrix_creuse::init_T0(N, delta_x);
+    //resolution avec euler_explicit creuse
+    vector<vector<double>> res3 = euler_explicit_resolution(T0_creuse, t0, dt, t, K1_creuse);
+    //resolution avec euler_implicit_creuse
+    vector<vector<double>> res4 = euler_implicit_resolution(T0_creuse, t0, dt, t, K1_creuse);
+    
+    //exécution du script python qui produit les graphes:
+    system("../../bash/exec_python.sh");
 
 
-    
-     //vector<Matrix> res = euler_explicit_resolution(T0, t0, dt,t,K1);
-     system("../../bash/exec_python.sh");
-     */
-    cout<< 8;
-     Matrix_creuse K1 = Matrix_creuse::init_K_stationnaire(3);
-     cout<< 8;
-     vector<double> T0;
-     T0.push_back(1);
-     T0.push_back(0);
-     T0.push_back(1);
-     
-     double t0 = 0;
-     double dt = 1;
-     double t = 5;
-     vector<double> res = final_resolution(K1, T0);
-     cout << res[0] << "r" << res[1] << "r0"<< res[2];
 
      return 0; 
      };
