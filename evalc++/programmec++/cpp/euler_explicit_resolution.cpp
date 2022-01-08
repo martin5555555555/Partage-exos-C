@@ -30,7 +30,7 @@ vector<Matrix> euler_explicit_resolution(const Matrix & T0, const double t0, con
         {
         cout << m_int.tab[i] << " ";
         };
-        T1 = T1 + m_int;
+        T1 = T1 +  m_int;
         res.push_back(T1);
         write_vector(textfile_vector, T1);
         textfile_vector << endl;

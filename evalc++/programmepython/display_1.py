@@ -1,6 +1,8 @@
 import itertools
+from re import X
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 #plt.use('Agg') # no UI backend
 
 import time
@@ -42,22 +44,30 @@ delta_x = 0.1
 x = np.arange(0,1,delta_x)
 n = len(results_explicit)
 for i in range (n):
-    plt.plot(x, results_explicit[:,i])
+    plt.plot(x, results_explicit[:,i],color = cm.hot((n-i)/15))
+plt.xlabel('X')
+plt.ylabel('Température')
 plt.savefig("results_euler_explicit")
 plt.close()
 
 for i in range (n):
-    plt.plot(x, results_implicit[:,i])
+    plt.plot(x, results_implicit[:,i], color = cm.hot((n-i)/15))
+plt.xlabel('X')
+plt.ylabel('Température')
 plt.savefig("results_euler_implicit")
 plt.close()
 
 for i in range (n):
-    plt.plot(x, results_explicit_creuse[:,i])
+    plt.plot(x, results_explicit_creuse[:,i], color = cm.hot((n-i)/15))
+plt.xlabel('X')
+plt.ylabel('Température')
 plt.savefig("results_euler_explicit_creuse")
 plt.close()
 
 for i in range (n):
-    plt.plot(x, results_implicit_creuse[:,i])
+    plt.plot(x, results_implicit_creuse[:,i], color = cm.hot((n-i)/15))
+plt.xlabel('X')
+plt.ylabel('Température')
 plt.savefig("results_euler_implicit_creuse")
 plt.close()
 

@@ -68,8 +68,8 @@ Matrix_creuse Matrix_creuse::init_K_stationnaire(const int N, const double delta
   return Matrix_creuse(m);
 };
 
-Matrix_creuse Matrix_creuse::init_K_variable(const int N)
-{ Matrix m = Matrix::init_K_variable(N);
+Matrix_creuse Matrix_creuse::init_K_variable(const int N, const double delta_x)
+{ Matrix m = Matrix::init_K_variable(N, delta_x);
   return Matrix_creuse(m);
 };
 Matrix_creuse Matrix_creuse::create_id(const int N)

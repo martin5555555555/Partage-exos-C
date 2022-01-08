@@ -25,7 +25,7 @@ vector<vector<double>> euler_implicit_resolution(const vector<double> & T0, cons
      for (double time = t0 + dt; time<t; time = time + dt)
     {   
         vector<double> T1 = res.back();
-         Matrix_creuse A1 = Id + K1;
+         Matrix_creuse A1 = Id + K1.mult_scal(-dt);
         T1 = final_resolution(A1, T1);
         res.push_back(T1);
         write_vector(textfile_vector, T1);

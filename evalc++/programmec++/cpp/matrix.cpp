@@ -38,12 +38,13 @@ Matrix::~Matrix()
 {
   
 };
+double f_remplissage()
+    {
+        return (50 + rand()%100)/100;
+    };
 
 vector<double> Matrix::init_random_D(const int N)
 {
-
-    
-  
     // Initialize the vector with
     // initial values as 0
     vector<double> V(N, 0);
@@ -53,12 +54,13 @@ vector<double> Matrix::init_random_D(const int N)
   
     // Generate value using generate
     // function
-    generate(V.begin(), V.end(), rand);
+    generate(V.begin(), V.end(), f_remplissage);
     
     for (int i = 0; i < N; i++) 
     {
         cout << V[i] << " ";
     };
+    return V;
 };
 
 
@@ -81,10 +83,10 @@ for(int i= 1; i<N-1; i++)
 *m(0,1) =0;
 
 
-return m*(1/delta_x/delta_x);
+return m*(1/(delta_x*delta_x));
 };
 
-Matrix Matrix::init_K_variable(const int N)
+Matrix Matrix::init_K_variable(const int N, const double delta_x)
 { vector<double> D1 = Matrix::init_random_D(N);
 Matrix m(N,N);
 cout << "okok";
@@ -103,8 +105,7 @@ return m;
 Matrix Matrix::init_T0(const int N, const double delta_x)
 {   double pi = M_PI;
     Matrix T0(N,1);
-    T0.tab[0] = 0;
-    for (int  i =1; i<N; i++)
+    for (int  i =0; i<N; i++)
     {   
 
         T0.tab[i] = 1/2 + sin(2*pi*i* delta_x) - 1/2 * cos(2*pi*i* delta_x);

@@ -25,7 +25,7 @@ vector<Matrix> euler_implicit_resolution(const Matrix & T0, const double t0, con
     for (double time = t0 + dt; time<t; time = time + dt)
     {   
         Matrix T1 = res.back();
-        Matrix A1 = Id + K1;
+        Matrix A1 = Id +K1* -dt;
         T1 = final_resolution(A1, T1);
         res.push_back(T1);
         write_vector(textfile_vector, T1);

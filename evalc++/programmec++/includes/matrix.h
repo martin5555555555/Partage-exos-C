@@ -19,8 +19,9 @@ class Matrix
     static Matrix init_K_stationnaire(const int N, const double delta_x) ;
     static Matrix init_T0(const int N, const double delta_x);
     static Matrix create_id(const int n);
+    double remplissage_f();
     static vector<double> init_random_D(const int N);
-    static Matrix init_K_variable(const int N);
+    static Matrix init_K_variable(const int N, const double delta_x);
 
     double* get(const int i, const int j) const;
     double* operator ()(const int i, const int j) const;

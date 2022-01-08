@@ -24,13 +24,13 @@ using namespace std;
      // premiers résultats à l'aide de D constant et de la classe Matrix "de base"
      double L = 1; // longueur du système choisi
      double N = 10; // nombre de points dans l'espace choisi
-     double delta_x = L/N;// pas de distance choisi
+     double delta_x = L/(N-1);// pas de distance choisi
     //initialisation des paramètres t0, t et dt:
     double t0 = 0; // temps initial
     double t = 0.5; // temps final
-    double dt = 0.05; // pas de temps choisi
+    double dt = 0.005; // pas de temps choisi
      //initialisation des matrices K1 et T0;
-     Matrix  K1 = Matrix::init_K_stationnaire(N, delta_x);
+     Matrix  K1 = Matrix::init_K_variable(N, delta_x);
      
      Matrix T0 = Matrix::init_T0(N, delta_x);
      

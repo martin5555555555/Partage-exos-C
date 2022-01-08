@@ -22,7 +22,7 @@ class Matrix_creuse
     static Matrix_creuse init_K_stationnaire(const int N, const double delta_x) ;
     static Matrix_creuse create_id(const int n);
     static vector<double> init_random_D(const int N);
-    static Matrix_creuse init_K_variable(const int N);
+    static Matrix_creuse init_K_variable(const int N, const double delta_x);
     static vector<double> init_T0(const int N, const double delta_x);
 
     double* get(const int i, const int j) const;
