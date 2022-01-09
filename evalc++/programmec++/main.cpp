@@ -12,6 +12,7 @@
 #include "factorisationLu.h"
 #include "matrix_creuse.h"
 #include "factorisationLu_creuse.h"
+#include "euler_explicit_D_variable.h"
 using namespace std;
     
 
@@ -30,7 +31,8 @@ using namespace std;
     double t = 0.5; // temps final
     double dt = 0.005; // pas de temps choisi
      //initialisation des matrices K1 et T0;
-     Matrix  K1 = Matrix::init_K_variable(N, delta_x);
+     Matrix  K1 = Matrix::init_K_stationnaire(N, delta_x);
+
      
      Matrix T0 = Matrix::init_T0(N, delta_x);
      
@@ -42,15 +44,23 @@ using namespace std;
     vector<Matrix> res2 = euler_implicit_resolution(T0, t0, dt, t, K1);
 
     Matrix_creuse  K1_creuse = Matrix_creuse::init_K_stationnaire(N, delta_x);
-     
     vector<double> T0_creuse = Matrix_creuse::init_T0(N, delta_x);
+
     //resolution avec euler_explicit creuse
     vector<vector<double>> res3 = euler_explicit_resolution(T0_creuse, t0, dt, t, K1_creuse);
     //resolution avec euler_implicit_creuse
     vector<vector<double>> res4 = euler_implicit_resolution(T0_creuse, t0, dt, t, K1_creuse);
     
+    //resolution avec D non constant
+    Matrix_creuse K1_variable = Matrix_creuse::init_K_variable(N, delta_x);
+    vector<vector<double>> res5 = euler_explicit_D_variable(T0_creuse, t0, dt, t, K1_creuse);
+    
     //exécution du script python qui produit les graphes:
     system("../../bash/exec_python.sh");
+    vector<double> res10 = Matrix::init_random_D(N);
+    for (int i =0; i<N;i++)
+       {cout << res10[i]<< " ";};
+    
 
 
 

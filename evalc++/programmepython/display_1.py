@@ -16,7 +16,6 @@ def text_to_vectors(textfile_name):
     for i in range (n):
         lists = content[i].split(',')
         lists =lists[0:-1]
-        print(lists)
         res[:,i] = np.vectorize(float)(np.array(lists))
     return res
 
@@ -38,6 +37,7 @@ results_explicit = text_to_vectors("../../programmepython/results_euler_explicit
 results_implicit = text_to_vectors("../../programmepython/results_euler_implicit") 
 results_explicit_creuse = text_to_vectors("../../programmepython/results_euler_explicit_creuse") 
 results_implicit_creuse = text_to_vectors("../../programmepython/results_euler_implicit_creuse") 
+results_explicit_D_variable = text_to_vectors("../../programmepython/results_euler_explicit_D_variable") 
 
 
 delta_x = 0.1
@@ -71,6 +71,12 @@ plt.ylabel('Température')
 plt.savefig("results_euler_implicit_creuse")
 plt.close()
 
+for i in range (n):
+    plt.plot(x, results_explicit_D_variable[:,i], color = cm.hot((n-i)/15))
+plt.xlabel('X')
+plt.ylabel('Température')
+plt.savefig("results_euler_explicit_D_variable")
+plt.close()
 
 
 
