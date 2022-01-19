@@ -6,7 +6,7 @@
 #include <vector>
 #include <fstream>
 using namespace std;
-
+ /* ce sont les mêmes programme que dans euler_implicit_resolution.cpp mais adapté pour les matrices creuse*/
 
 vector<vector<double>> euler_implicit_resolution(const vector<double> & T0, const double  t0, const double dt,const double t,const Matrix_creuse & K1)
 {   vector<vector<double>> res;

@@ -4,9 +4,15 @@
 #include "matrix.h"
 using namespace std;
 
+/* cette classe de matrice tiens compte du caractère tridigonal des matrices que l'on manipule. Ainsi, 
+une matrice sera représentée par 3 vecteurs correspondant à ses trois diagonales, le reste de la 
+matrice étant vide.
+Cette classe représentera seulement des matrices carrées, et ainsi, les vecteurs colonnes dont nous
+auront besoin seront représnetés par des std::vector*/
+
 class Matrix_creuse 
 {
-    public :
+    private :
         int size;
         vector<double> diago_up;
         vector<double> diago;
@@ -19,6 +25,16 @@ class Matrix_creuse
     ~Matrix_creuse();
 
     public:
+    //getters:
+    int getsize() const;
+    vector<double> getdiago() const;
+    vector<double> getdiago_down() const;
+    vector<double> getdiago_up() const;
+    //setters
+    vector<double>& setdiago();
+    vector<double>& setdiago_down();
+    vector<double>& setdiago_up();
+
     static Matrix_creuse init_K_stationnaire(const int N, const double delta_x) ;
     static Matrix_creuse create_id(const int n);
     static vector<double> init_random_D(const int N);

@@ -5,6 +5,8 @@
 #include <fstream>
 using namespace std;
 
+/*même chose que euler_implicit_resolution.cpp mais avec euler_explicit et le D variable 
+(c'est la même fonction que euler explicit creuse, seul le nom du fichier crée change.*/
 
 
 vector<vector<double>> euler_explicit_D_variable(const vector<double> & T0, const double  t0, const double dt,const double t,const Matrix_creuse & K1)

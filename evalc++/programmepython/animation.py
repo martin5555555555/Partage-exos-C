@@ -3,6 +3,9 @@ from re import X
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+import matplotlib.animation as animation
+
+
 #plt.use('Agg') # no UI backend
 
 import time
@@ -39,46 +42,22 @@ results_explicit_creuse = text_to_vectors("../../programmepython/results_euler_e
 results_implicit_creuse = text_to_vectors("../../programmepython/results_euler_implicit_creuse") 
 results_explicit_D_variable = text_to_vectors("../../programmepython/results_euler_explicit_D_variable") 
 
-#récupération de delta_x dont on a besoin pour tracer le graphe
-fichierdelta_x = open("../../programmepython/file_delta_x")
-content = fichierdelta_x.readlines()
-delta_x = float(content[0])
 
+delta_x = 0.1
 x = np.arange(0,1,delta_x)
 n = len(results_explicit)
-for i in range (n):
-    plt.plot(x, results_explicit[:,i],color = cm.hot((n-i)/15))
-plt.xlabel('X')
-plt.ylabel('Température')
-plt.savefig("../../results_euler_explicit")
-plt.close()
 
-for i in range (n):
-    plt.plot(x, results_implicit[:,i], color = cm.hot((n-i)/15))
-plt.xlabel('X')
-plt.ylabel('Température')
-plt.savefig("../../results_euler_implicit")
-plt.close()
+fig = plt.figure() # initialise la figure
+line, = plt.plot([], [])
 
-for i in range (n):
-    plt.plot(x, results_explicit_creuse[:,i], color = cm.hot((n-i)/15))
-plt.xlabel('X')
-plt.ylabel('Température')
-plt.savefig("../../results_euler_explicit_creuse")
-plt.close()
+def animate(i):
+    x = np.arange(0, len(results_explicit[:,i]), 1)
+    y =  results_explicit[:,i]
+    line.set_data(x, y)
+    return line
+# Set up formatting for the movie files
+Writer = animation.writers['ffmpeg']
+writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
 
-for i in range (n):
-    plt.plot(x, results_implicit_creuse[:,i], color = cm.hot((n-i)/15))
-plt.xlabel('X')
-plt.ylabel('Température')
-plt.savefig("../../results_euler_implicit_creuse")
-plt.close()
-
-for i in range (n):
-    plt.plot(x, results_explicit_D_variable[:,i], color = cm.hot((n-i)/15))
-plt.xlabel('X')
-plt.ylabel('Température')
-plt.savefig("../../results_euler_explicit_D_variable")
-plt.close()
-
-
+ani = animation.FuncAnimation(fig, animate, frames=len(time), interval=2)
+ani.save("animation.mp4", writer = writer)
