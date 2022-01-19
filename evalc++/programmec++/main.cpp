@@ -44,7 +44,7 @@ et afficher les graphes des données. Ces graphes se trouvent dans le build.*/
     //initialisation des paramètres t0, t et dt:
     double t0 = 0; // temps initial
     double t = 0.5; // temps final
-    double dt = 0.0005; // pas de temps choisi
+    double dt = 0.005; // pas de temps choisi
     
     fstream file_delta_x;
     string name_delta_x = "../../programmepython/file_delta_x";
@@ -96,7 +96,7 @@ et afficher les graphes des données. Ces graphes se trouvent dans le build.*/
         };
         auto end = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start);
-        cout << "euler explicit  a duré " << duration.count()/100 << "microsecondes." << endl;
+        cout << "euler explicit  a duré " << duration.count()/100 << " microsecondes." << endl;
 
         auto start2 = std::chrono::high_resolution_clock::now();
         for (int i=0; i<100; i++)
@@ -105,7 +105,7 @@ et afficher les graphes des données. Ces graphes se trouvent dans le build.*/
         };
         auto end2 = std::chrono::high_resolution_clock::now();
         auto duration2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2);
-        cout << "euler explicit creuse  a duré " << duration2.count()/100 << "microsecondes." << endl;
+        cout << "euler explicit creuse  a duré " << duration2.count()/100 << " microsecondes." << endl;
         cout << "on a bien une diminution du temps de calcul, car les opérations sur les matrices creuses nécessitent moins de calcul"<<endl;
 
     };

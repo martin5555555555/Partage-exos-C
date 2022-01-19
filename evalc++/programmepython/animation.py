@@ -60,4 +60,4 @@ Writer = animation.writers['ffmpeg']
 writer = Writer(fps=15, metadata=dict(artist='Me'), bitrate=1800)
 
 ani = animation.FuncAnimation(fig, animate, frames=len(time), interval=2)
-ani.save("animation.mp4", writer = writer)
+ani.save("../../animation.mp4", writer = writer)

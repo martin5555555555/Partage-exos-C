@@ -45,7 +45,6 @@ void test()
            *Mat_test_1(i,j) = stoi(ctab2[j]);
         };
     };
-
    Matrix res(length, width);
    cout << "choix opérateur à tester" << endl;
    string operateur;
@@ -90,14 +89,38 @@ void test()
 
     if (operateur == "+") { res = Mat_test_1 + Mat_test_2;}
     if (operateur== "*") { res = Mat_test_1 * Mat_test_2;}
-     
-    };
-   };
+
     cout << "affichage du résultat" << endl;
+        cout << "mat1 =" << endl;
     for (int i=0; i<length; i++)
     {    cout << "|" << " ";
         for (int j =0; j<width; j++)
         {
+            cout <<  *Mat_test_1(i,j)<< " ";
+        };
+        cout << "|" << endl;
+    };
+      cout << "mat2 =" << endl;
+    for (int i=0; i<length; i++)
+    {    cout << "|" << " ";
+        for (int j =0; j<width; j++)
+        {   
+            cout <<  *Mat_test_2(i,j)<< " ";
+        };
+        cout << "|" << endl;
+    
+    };
+     
+    };
+        
+
+   };
+    
+    cout << "res =" << endl;
+    for (int i=0; i<length; i++)
+    {    cout << "|" << " ";
+        for (int j =0; j<width; j++)
+        {   
             cout <<  *res(i,j)<< " ";
         };
         cout << "|" << endl;
