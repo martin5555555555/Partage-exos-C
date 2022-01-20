@@ -20,7 +20,7 @@ using namespace std;
     
 /*lorsqu'on exécute le main, la partie c++ est d'abord exécutée, ce qui écris les différents résultats
 des fichiers. Puis, grâce au script en bash qui sera lancé, le programme python va lire ces fichiers
-et afficher les graphes des données. Ces graphes se trouvent dans le build.*/
+et afficher les graphes des données. Ces graphes se trouve dans le dossier evalc++..*/
  int main()
 {   cout << "voulez vous tester la classe matrice" << endl;
     string ans;

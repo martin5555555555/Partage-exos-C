@@ -77,7 +77,7 @@ void test()
     Matrix Mat_test_2(length, width);
     for (int i=0; i<length; i++)
     {
-        cout << "remplir premiere ligne (on attend une liste de nombre de la longueur d'une ligne séparés par des espaces)"<<endl;
+        cout << "remplir premiere ligne (on attend une liste de nombre de la longueur d'une ligne séparés par des virgules)"<<endl;
          string ctab;
         cin >> ctab;
         vector<string> ctab2 = decoupe(ctab, width);

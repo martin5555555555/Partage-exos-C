@@ -1,3 +1,8 @@
 build
-.vscode
-results
+.vscode/
+../results_euler_explicit_creuse.png
+../results_euler_implicit_creuse.png
+../results_euler_explicit.png
+../results_euler_implicit.png
+../results_euler_explicit_D_variable.png
+
